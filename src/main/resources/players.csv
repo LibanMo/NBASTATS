@@ -1,0 +1,22 @@
+players = [
+    "LeBron James", "Kevin Durant", "Giannis Antetokounmpo", "Stephen Curry", "Kawhi Leonard",
+    "Nikola Jokic", "Joel Embiid", "James Harden", "Luka Doncic", "Anthony Davis",
+    "Damian Lillard", "Jimmy Butler", "Jayson Tatum", "Chris Paul", "Devin Booker",
+    "Paul George", "Donovan Mitchell", "Bam Adebayo", "Rudy Gobert", "Zion Williamson",
+    "Karl-Anthony Towns", "Kyrie Irving", "Bradley Beal", "Trae Young", "Khris Middleton",
+    "Pascal Siakam", "Ben Simmons", "Russell Westbrook", "Jaylen Brown", "CJ McCollum",
+    "Brandon Ingram", "De'Aaron Fox", "Jrue Holiday", "John Collins", "Tobias Harris",
+    "Kristaps Porzingis", "Ja Morant", "Shai Gilgeous-Alexander", "DeMar DeRozan", "Malcolm Brogdon",
+    "Fred VanVleet", "Julius Randle", "Domantas Sabonis", "LaMelo Ball", "Mike Conley",
+    "Jaren Jackson Jr.", "Jamal Murray", "Michael Porter Jr.", "Clint Capela", "Myles Turner",
+    "Gordon Hayward", "Jerami Grant", "Christian Wood", "Collin Sexton", "Spencer Dinwiddie",
+    "Zach LaVine", "Terry Rozier", "Andrew Wiggins", "Jonas Valanciunas", "John Wall",
+    "Aaron Gordon", "Buddy Hield", "Bojan Bogdanovic", "Lauri Markkanen", "Derrick Rose",
+    "Steven Adams", "Tyler Herro", "Bogdan Bogdanovic", "Caris LeVert", "Tim Hardaway Jr.",
+    "Josh Richardson", "Dejounte Murray", "Duncan Robinson", "Joe Harris", "Evan Fournier",
+    "Robert Covington", "Serge Ibaka", "Montrezl Harrell", "Kevin Love", "Ricky Rubio",
+    "Kelly Oubre Jr.", "Mikal Bridges", "Daniel Theis", "Lonzo Ball", "Marcus Smart",
+    "Norman Powell", "Thaddeus Young", "D'Angelo Russell", "Derrick White", "Mitchell Robinson",
+    "Patrick Beverley", "PJ Washington", "Kyle Lowry", "Seth Curry", "Davis Bertans",
+    "Andre Drummond", "Otto Porter Jr.", "Will Barton", "Eric Bledsoe", "Lou Williams"
+]
