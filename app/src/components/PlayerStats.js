@@ -8,7 +8,11 @@ const PlayerStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/stats/season/${seasonId}`);
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+
+        const response = await fetch(`${API_BASE_URL}/stats/season/${seasonId}`);
+
+        console.log(response)
         const data = await response.json();
         setStats(data);
         console.log("amount of items = " + data.length )

@@ -5,13 +5,21 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8081:8080"
+      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personpool
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
     depends_on:
       - db
+  app-frontend:
+    build:
+      context: ./app # Adjust this to the path of your React app
+      dockerfile: Dockerfile # Ensure this Dockerfile is set up for your React app
+    ports:
+      - "8082:80"
+    environment:
+      - REACT_APP_API_BASE_URL=http://app:8080
   db:
     image: postgres
     environment:

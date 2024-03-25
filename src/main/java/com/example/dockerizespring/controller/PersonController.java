@@ -32,7 +32,7 @@ public class PersonController {
     }
 
     @GetMapping("/stats/season/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     public List<PlayerStat> statsSeason(@PathVariable Long id){
         return playerService.statsSeason(id);
     }
