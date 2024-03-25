@@ -32,6 +32,7 @@ public class PersonController {
     }
 
     @GetMapping("/stats/season/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<PlayerStat> statsSeason(@PathVariable Long id){
         return playerService.statsSeason(id);
     }
@@ -52,6 +53,7 @@ public class PersonController {
     @PostMapping("create")
     public void createPlayer(@RequestBody Player player) {
         playerService.savePlayer(player);
+        getStats(player.getId());
     }
 
     @GetMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.dockerizespring.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -17,6 +18,7 @@ public class PlayerStat {
   private Integer blk;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
+    @JsonBackReference
     private Player player;
 
     public PlayerStat() {
