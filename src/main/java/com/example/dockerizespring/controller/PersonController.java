@@ -1,6 +1,7 @@
 package com.example.dockerizespring.controller;
 
 import com.example.dockerizespring.models.Player;
+import com.example.dockerizespring.models.PlayerDTO;
 import com.example.dockerizespring.models.PlayerStat;
 import com.example.dockerizespring.repos.PlayerRepository;
 import com.example.dockerizespring.service.PlayerService;
@@ -51,15 +52,25 @@ public class PersonController {
 
     // Create a new person
     @PostMapping("create")
-    public void createPlayer(@RequestBody Player player) {
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
+    public Long createPlayer(@RequestBody Player player) {
         playerService.savePlayer(player);
         getStats(player.getId());
+        return player.getId();
     }
-
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     @GetMapping("/{id}")
     public Player getPlayerById(@PathVariable Long id){
        return playerService.getPlayerById(id);
     }
+
+
+    @GetMapping("players/latest")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
+    public List<PlayerDTO> getAllPlayersLatestGame() {
+        return playerService.getAllPlayersLatestGame();
+    }
+
 
     @DeleteMapping("delete/{id}")
     public void deleteById(@PathVariable Long id){

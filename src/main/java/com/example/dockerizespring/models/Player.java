@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Player {
@@ -53,6 +55,12 @@ public class Player {
     public void addPlayerStat(PlayerStat playerStat) {
         this.playerStats.add(playerStat);
         playerStat.setPlayer(this);
+    }
+
+    public PlayerStat getLatestGameStat() {
+        return this.getPlayerStats().stream()
+                .max(Comparator.comparing(PlayerStat::getDate))
+                .orElse(null); // Returns null if no stats are found
     }
 
 

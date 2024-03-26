@@ -1,11 +1,15 @@
 package com.example.dockerizespring.service;
 
 import com.example.dockerizespring.models.Player;
+import com.example.dockerizespring.models.PlayerDTO;
 import com.example.dockerizespring.models.PlayerStat;
+import com.example.dockerizespring.models.PlayerStatDTO;
 import com.example.dockerizespring.repos.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +54,32 @@ public class PlayerService {
 
     public void savePlayer(Player player) {
         playerRepository.save(player);
+    }
+
+    public List<PlayerDTO> getAllPlayersLatestGame() {
+
+      List<Player> players =  playerRepository.findAll();
+      List<PlayerDTO> latestPlayers = new ArrayList<>();
+      for (Player p : players){
+          latestPlayers.add(convertToDto(p));
+
+      }
+        return latestPlayers;
+    }
+
+    public PlayerDTO convertToDto(Player player) {
+        PlayerStatDTO latestStatDto = null;
+        PlayerStat latestStat = player.getLatestGameStat();
+        if (latestStat != null) {
+            latestStatDto = new PlayerStatDTO(
+                    latestStat.getDate(),
+                    latestStat.getPts(),
+                    latestStat.getReb(),
+                    latestStat.getAst(),
+                    latestStat.getStl(),
+                    latestStat.getBlk()
+            );
+        }
+        return new PlayerDTO(player.getId(), player.getName(), player.getTeam(), latestStatDto);
     }
 }
