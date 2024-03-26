@@ -41,6 +41,7 @@ public class PersonController {
 
 
     @GetMapping("/scrape/stats/{id}")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     public List<PlayerStat> getStats(@PathVariable Long id){
         Optional<Player> p = playerRepository.findById(id);
         if(p.isPresent()){
@@ -73,6 +74,7 @@ public class PersonController {
 
 
     @DeleteMapping("delete/{id}")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     public void deleteById(@PathVariable Long id){
 
         Player p = playerService.getPlayerById(id);
