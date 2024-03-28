@@ -51,7 +51,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 
   return (
     <div>
-      <h2>Create a New GGG</h2>
+      <h2>Create a New NBA player</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Player Name:
