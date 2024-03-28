@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './styles/AllPlayerStats.css';
 import { useNavigate } from 'react-router-dom';
+// AllPlayerStats.js or some other file
+import { updatePlayerStats } from './updatePlayerStats';
+
+
 
 function AllPlayerStats() {
     const [stats, setStats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-       
+     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
     useEffect(() => {
         setIsLoading(true);
-        fetch('http://localhost:8080/players/latest')
+        fetch(API_BASE_URL+ '/players/latest')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch');
@@ -35,7 +40,7 @@ function AllPlayerStats() {
         navigate(`/${playerId}`); // Navigate to player detail page
     };
 
-    console.log("Stats state before rendering:", stats);
+    
 
     return (
         <div className="allPlayerStats">
@@ -55,13 +60,23 @@ function AllPlayerStats() {
                 <tbody>
                     {stats.map((stat, index) => (
                         <tr key={index} onClick={() => handleRowClick(stat.id)} >
-                            <td>{stat.name}</td>
+                            <td>{stat.name}</td> 
                             <td>{stat.latestGameStat.date}</td>
                             <td>{stat.latestGameStat.pts}</td>
                             <td>{stat.latestGameStat.reb}</td>
                             <td>{stat.latestGameStat.ast}</td>
                             <td>{stat.latestGameStat.stl}</td>
                             <td>{stat.latestGameStat.blk}</td>
+                           <td>
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent the row click event
+                                        updatePlayerStats(stat.id);
+                                    }}
+                                    >
+                                    Update Stats
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

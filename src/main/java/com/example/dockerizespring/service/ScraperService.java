@@ -19,6 +19,10 @@ public class ScraperService {
 @Autowired
 PlayerService playerService;
 
+    public ScraperService(PlayerService playerService) {
+        this.playerService = playerService;
+    }
+
     public String executeScript(String playerName) {
         System.out.println("hello scraperservice");
         try {

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class PlayerService {
+
     @Autowired
     private PlayerRepository playerRepository; // You need to implement this repository interface
 
@@ -81,5 +82,17 @@ public class PlayerService {
             );
         }
         return new PlayerDTO(player.getId(), player.getName(), player.getTeam(), latestStatDto);
+    }
+
+    public void updateStat(Long id) {
+        Optional<Player> maybePlayer = playerRepository.findById(id);
+        if (maybePlayer.isPresent()) {
+            Player p = maybePlayer.get();
+            ScraperService scraperService = new ScraperService(this);
+            p.getPlayerStats().clear();
+            p.setPlayerStats(scraperService.getStats(p.getName()));
+        }
+
+
     }
 }

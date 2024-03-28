@@ -1,9 +1,7 @@
-version: '3.0'
+version: '3.8'
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: libanmo/spring-app:late # Use the latest tag or specify a version
     ports:
       - "8080:8080"
     environment:
@@ -13,13 +11,11 @@ services:
     depends_on:
       - db
   app-frontend:
-    build:
-      context: ./app # Adjust this to the path of your React app
-      dockerfile: Dockerfile # Ensure this Dockerfile is set up for your React app
+    image: libanmo/frontend-app:one
     ports:
       - "8082:80"
     environment:
-      - REACT_APP_API_BASE_URL=http://app:8080
+      REACT_APP_API_BASE_URL: "http://16.171.23.194:8080"# Adjust if necessary
   db:
     image: postgres
     environment:

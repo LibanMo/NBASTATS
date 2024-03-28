@@ -5,17 +5,19 @@ import { useParams } from 'react-router-dom';
 const PlayerStats = () => {
   const [stats, setStats] = useState([]);
   const { seasonId } = useParams(); // Extract the seasonId from URL parameters
+   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
-
+      
         const response = await fetch(`${API_BASE_URL}/stats/season/${seasonId}`);
 
         console.log(response)
         const data = await response.json();
         setStats(data);
+        <div>
+        loading stats'</div>
         console.log("amount of items = " + data.length )
       } catch (error) {
         console.error("Failed to fetch player stats:", error);

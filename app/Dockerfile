@@ -4,7 +4,8 @@ FROM node:14 AS build-step
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
-COPY . .
+COPY . . 
+COPY .env ./  
 RUN npm run build
 
 # Step 2: Serve the app with Nginx
