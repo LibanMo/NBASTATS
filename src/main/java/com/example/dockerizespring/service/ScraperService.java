@@ -79,7 +79,7 @@ PlayerService playerService;
                 if(gs.equals("1") || gs.equals("0")){
                     String date = row.getCell(2).asText().trim();
                     String team = row.getCell(4).asText();
-                    Integer reb = Integer.valueOf(row.getCell(row.getCells().size() - 10).asText());
+                    Integer reb = Integer.valueOf(row.getCell(row.getCells().size() - 9).asText());
                     Integer ast = Integer.valueOf(row.getCell(row.getCells().size() - 8).asText());
                     Integer stl = Integer.valueOf(row.getCell(23).asText());
                     Integer blk = Integer.valueOf(row.getCell(24).asText());

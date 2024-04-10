@@ -15,7 +15,7 @@ public class Player {
     private Long id;
     private String name;
     private String team;
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<PlayerStat> playerStats = new ArrayList<>();
 

@@ -8,7 +8,7 @@ function CreatePlayerForm() {
   const navigate = useNavigate();
 
   
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
+const API_BASE_URL = "http://localhost:8080";
 
   const handleSubmit = async (event) => {
     console.log(API_BASE_URL)
@@ -16,7 +16,6 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
     setIsLoading(true);
 
     try {
-      
       const response = await fetch(`${API_BASE_URL}/create`, { // Use the API_BASE_URL
         method: 'POST',
         headers: {
@@ -51,16 +50,19 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 
   return (
     <div>
-      <h2>Create a New NBA player</h2>
+      <h2>Create a New NBA playesdasdsadsdr</h2>
       <form onSubmit={handleSubmit}>
+      <div class="form-group" style={{backgroundColor: 'green'}}>
         <label>
           Player Name:
           <input
+            class="form-control"
             type="text"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
           />
         </label>
+        </div>
         <br />
         <label>
           Team Name:
@@ -72,6 +74,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
         </label>
         <br />
         <button type="submit">Create Player</button>
+        
       </form>
     </div>
   );

@@ -11,7 +11,7 @@ function AllPlayerStats() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
+     const API_BASE_URL = "http://localhost:8080";
 
     useEffect(() => {
         setIsLoading(true);
@@ -20,11 +20,13 @@ function AllPlayerStats() {
                 if (!response.ok) {
                     throw new Error('Failed to fetch');
                 }
+                
                 return response.json();
             })
             .then(data => {
                 setStats(data);
                 setIsLoading(false);
+                
             })
             .catch(error => {
                 console.error('Error fetching player stats:', error);
@@ -32,6 +34,7 @@ function AllPlayerStats() {
                 setIsLoading(false);
             });
     }, []);
+    
 
     if (isLoading) return <div className="allPlayerStats">Loading...</div>;
     if (error) return <div className="allPlayerStats">Error: {error}</div>;
@@ -40,11 +43,11 @@ function AllPlayerStats() {
         navigate(`/${playerId}`); // Navigate to player detail page
     };
 
-    
 
     return (
         <div className="allPlayerStats">
-            <h2>All Player Stats</h2>
+            <h2>All Player Stats </h2>
+            <p>press update to update all player stats...</p>
             <table className="table">
                 <thead>
                     <tr>

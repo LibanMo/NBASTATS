@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const PlayerStats = () => {
   const [stats, setStats] = useState([]);
   const { seasonId } = useParams(); // Extract the seasonId from URL parameters
-   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
+   const API_BASE_URL ="http://localhost:8080";
 
   useEffect(() => {
     const fetchStats = async () => {

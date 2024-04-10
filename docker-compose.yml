@@ -1,28 +1,54 @@
 version: '3.8'
+networks:
+  my-app-network:
 services:
   app:
-    image: libanmo/spring-app:late # Use the latest tag or specify a version
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    networks: # Connect app container to the network
+      - my-app-network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personpool
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/playersDB
+      SPRING_DATASOURCE_USERNAME: "${DB_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${DB_PASSWORD}"
     depends_on:
       - db
   app-frontend:
-    image: libanmo/frontend-app:one
+    build:
+      context: ./app
+      dockerfile: Dockerfile
     ports:
       - "8082:80"
-    # Adjust if necessary
+    networks: # Connect app container to the network
+      - my-app-network
+  dash-app:
+    build:
+      context: ./Graphs
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/playersDB
+
+    ports:
+      - "8050:8050"
+    networks: # Connect app container to the network
+      - my-app-network
+
+
   db:
     image: postgres
     environment:
-      POSTGRES_DB: personpool
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: playersDB
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks: # Connect app container to the network
+      - my-app-network
 
 volumes:
   postgres-data:
