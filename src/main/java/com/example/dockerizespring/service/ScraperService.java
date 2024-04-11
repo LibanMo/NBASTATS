@@ -23,28 +23,6 @@ PlayerService playerService;
         this.playerService = playerService;
     }
 
-    public String executeScript(String playerName) {
-        System.out.println("hello scraperservice");
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder("node", "src/main/java/com/example/dockerizespring/pupeteer/postAllstar.js", playerName);
-            Process process = processBuilder.start();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            StringBuilder output = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-
-            int exitCode = process.waitFor();
-            System.out.println("Exited with error code : " + exitCode);
-            System.out.println(output.toString());
-            return output.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
     public List<PlayerStat> getStats(String name){
         try{
 

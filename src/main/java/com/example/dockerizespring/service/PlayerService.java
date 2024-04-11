@@ -96,5 +96,12 @@ public class PlayerService {
     }
 
 
-
+    public Player findById(Long id) {
+        Optional<Player> maybePlayer = playerRepository.findById(id);
+        if(maybePlayer.isPresent()) {
+            Player p = maybePlayer.get();
+            return p;
+        }
+        return  null;
+    }
 }

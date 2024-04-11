@@ -15,23 +15,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("")
+public class PlayerController {
+    @Autowired
+    private  ScraperService scraperService;
 
-public class PersonController {
-    @Autowired
-    private final ScraperService scraperService;
-    @Autowired
-    private PlayerRepository playerRepository;
 
     @Autowired
     PlayerService playerService;
-
-    @Autowired
-    public PersonController(ScraperService scraperService, PlayerRepository playerRepository, PlayerService playerService) {
-        this.scraperService = scraperService;
-        this.playerRepository = playerRepository;
-        this.playerService = playerService;
-
-    }
 
     @GetMapping("/stats/season/{id}")
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
@@ -40,34 +30,29 @@ public class PersonController {
     }
 
 
-
     @GetMapping("/scrape/stats/{id}")
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
     public List<PlayerStat> getStats(@PathVariable Long id){
-        Optional<Player> p = playerRepository.findById(id);
-        if(p.isPresent()){
-            Player isPlayer = p.get();
-            return scraperService.getStats(isPlayer.getName());
-        }
-        return null;
+        Player p = playerService.findById(id);
+        return scraperService.getStats(p.getName());
     }
 
     // Create a new person
     @PostMapping("create")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     public void createPlayer(@RequestBody Player player) {
         playerService.savePlayer(player);
         getStats(player.getId());
     }
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     @GetMapping("/{id}")
     public Player getPlayerById(@PathVariable Long id){
-       return playerService.getPlayerById(id);
+        return playerService.getPlayerById(id);
     }
 
 
     @GetMapping("players/latest")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
 
     public List<PlayerDTO> getAllPlayersLatestGame() {
         return playerService.getAllPlayersLatestGame();
@@ -75,7 +60,7 @@ public class PersonController {
 
 
     @PutMapping("/stats/update/{id}")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082", "http://16.171.23.194:8082"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     public void  updatePlayerStat(@PathVariable Long id) {
         playerService.updateStat(id);
 

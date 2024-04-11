@@ -13,7 +13,7 @@ server = app.server
 load_dotenv()
 
 
-# Define the layout of the app
+# the layout of the app
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),  # To access URL parameters
     dcc.Graph(id='player_comparison_graph'),  # The graph to display player stats
@@ -32,19 +32,19 @@ app.layout = html.Div([
 ])
 
 # Define the callback to update the graph based on URL parameters
-
 @app.callback(
     Output('player_comparison_graph', 'figure'),
     Input('url', 'search'),
     Input('stats_checklist', 'value')
 )
+# when the graph is updated
 def update_graph(search, selected_stats):
     if not search or not selected_stats:
         return go.Figure()
 
     # Parse the URL search parameters for multiple player IDs
     params = parse_qs(search.lstrip('?'))
-    player_ids = [value for key, value in params.items() if key.startswith('player_id_')]
+    player_ids = [value for key, value in params.items() if key.startswith('player_id_')] # parses the playerId from the URL
 
     if not player_ids or any([pid == [None] for pid in player_ids]):
         return go.Figure()  # Return an empty figure if no valid player IDs
