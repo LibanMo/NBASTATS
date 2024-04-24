@@ -95,20 +95,14 @@ def update_graph(search, selected_stats,start_date,end_date, enable_date_range_v
             df = fetch_player_data(pid, selected_stats)  # Fetch data for the selected statistic
             if df.empty:
                 continue
-
-            player_name = df['name'].iloc[0]
-            trace = go.Scatter(x=df['date'], y=df[selected_stats], mode='lines+markers', name=f'{player_name} - {selected_stats.capitalize()}')
-            fig.add_trace(trace)
     else:
-        for pid in player_ids:
-            df = fetch_player_data_date_filter(pid,selected_stats, start_date, end_date)            
-            
-            player_name = df['name'].iloc[0]
-            trace = go.Scatter(x=df['date'], y=df[selected_stats], mode='lines+markers', name=f'{player_name} - {selected_stats.capitalize()}')
-            fig.add_trace(trace)
+         df = fetch_player_data_date_filter(pid,selected_stats, start_date, end_date)            
+    player_name = df['name'].iloc[0]
 
         # Add a trace for the selected statistic
-    
+    fig.add_trace(
+            go.Scatter(x=df['date'], y=df[selected_stats], mode='lines+markers', name=f'{player_name} - {selected_stats.capitalize()}')
+        )
 
     fig.update_layout(
         title="Player Statistics Comparison",

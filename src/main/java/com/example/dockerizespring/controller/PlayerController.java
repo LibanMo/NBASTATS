@@ -40,9 +40,10 @@ public class PlayerController {
     // Create a new person
     @PostMapping("create")
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
-    public void createPlayer(@RequestBody Player player) {
+    public Long createPlayer(@RequestBody Player player) {
         playerService.savePlayer(player);
         getStats(player.getId());
+        return player.getId();
     }
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8082"})
     @GetMapping("/{id}")

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 function DashIframe() {
   // Initialize with one empty input
-  const [playerIds, setPlayerIds] = useState(['']);
+  const [playerIds, setPlayerIds] = useState([""]);
 
   const handlePlayerIdChange = (index, value) => {
     // Update the specific player ID based on the index
@@ -13,7 +13,7 @@ function DashIframe() {
 
   const addPlayerInput = () => {
     // Add a new input field by adding an empty string to the playerIds array
-    setPlayerIds([...playerIds, '']);
+    setPlayerIds([...playerIds, ""]);
   };
 
   const removePlayerInput = (index) => {
@@ -23,10 +23,11 @@ function DashIframe() {
     setPlayerIds(newPlayerIds);
   };
 
-  const iframeSrc = `http://localhost:8050/?${playerIds.map((id, index) => `player_id_${index + 1}=${id}`).join('&')}`;
+  const iframeSrc = `http://localhost:8050/?${playerIds
+    .map((id, index) => `player_id_${index + 1}=${id}`)
+    .join("&")}`;
 
   // Hitta IP-adressen:
-  
 
   return (
     <div>
@@ -46,7 +47,7 @@ function DashIframe() {
       <button onClick={addPlayerInput}>Add Player</button>
       <iframe
         src={iframeSrc}
-        style={{ width: '100%', height: '600px', border: 'none' }}
+        style={{ width: "100%", height: "600px", border: "none" }}
         title="Player Statistics"
       />
     </div>
